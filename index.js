@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 
 mongoose
   .connect(
-    "mongodb+srv://phamlong:12112002@cluster1.pphau.mongodb.net/ai2048?retryWrites=true&w=majority"
+    process.env.MONGO_URL
   )
   .then(() => {
     console.log("Connected to MongoDB Atlas.");
