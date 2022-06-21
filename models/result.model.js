@@ -22,6 +22,9 @@ const resultSchema = new Schema({
     simulationDepth: {
         type: Number,
     },
+    maxTile:{
+        type: Number,
+    }
 
 });
 

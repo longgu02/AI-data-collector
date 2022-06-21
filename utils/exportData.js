@@ -14,14 +14,14 @@ const exportExcel = (data, workSheetColumnNames, workSheetName, filePath) =>{
 
 const exportResultToExcel = (result, workSheetColumnNames, workSheetName, filePath) => {
     const data = result.map((result) => {
-        return [result.score, result.algorithm, result.maxDepth ,result.iterations, result.simulationDepth]
+        return [result.score, result.algorithm, result.maxDepth ,result.iterations, result.simulationDepth, result.maxTile]
     });
     exportExcel(data, workSheetColumnNames, workSheetName, filePath);
 }
 
 const exportAllResultToExcel = (result, workSheetColumnNames, workSheetName, filePath) => {
     const data = result.map((result) => {
-        return [result.score, result.algorithm, result.maxDepth ,result.iterations, result.simulationDepth]
+        return [result.score, result.algorithm, result.maxDepth ,result.iterations, result.simulationDepth, result.maxTile]
     });
     exportExcel(data, workSheetColumnNames, workSheetName, filePath);
 }

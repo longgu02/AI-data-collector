@@ -9,7 +9,11 @@ const port = 6969;
 const Result = require('./models/result.model');
 const { exportResultToExcel } = require('./utils/exportData.js'); 
 const { exportAllResultToExcel } = require('./utils/exportData.js');
+const cors = require('cors');
 
+app.use(cors({
+  origin: "*"
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -35,10 +39,12 @@ app.post('/api/v1/add-result/minimax', async (req, res) => {
         algorithm: "minimax",
         maxDepth: req.body.maxDepth,
         iterations: req.body.iterations,
-        simulationDepth: req.body.simulationDepth
+        simulationDepth: req.body.simulationDepth,
+        maxTile: req.body.maxTile
     })
 
     await result.save();
+    console.log(result);
     res.json({message: "Successfully", result});
   }catch(err){
     res.json({message: err});
@@ -53,10 +59,12 @@ app.post('/api/v1/add-result/expectimax', async (req, res) => {
         algorithm: "expectimax",
         maxDepth: req.body.maxDepth,
         iterations: req.body.iterations,
-        simulationDepth: req.body.simulationDepth
+        simulationDepth: req.body.simulationDepth,
+        maxTile: req.body.maxTile
     })
 
     await result.save();
+    console.log(result);
     res.json({message: "Successfully", result});
   }catch(err){
     res.json({message: err});
@@ -70,10 +78,12 @@ app.post('/api/v1/add-result/mcts', async (req, res) => {
         algorithm: "mcts",
         maxDepth: req.body.maxDepth,
         iterations: req.body.iterations,
-        simulationDepth: req.body.simulationDepth
+        simulationDepth: req.body.simulationDepth,
+        maxTile: req.body.maxTile
     })
 
     await result.save();
+    console.log(result);
     res.json({message: "Successfully", result});
   }catch(err){
     res.json({message: err});
@@ -96,7 +106,8 @@ app.get('/api/v1/get-results', async (req,res) => {
           "Algorithm",
           "Max depth",
           "Iterations",
-          "Simulation depth"
+          "Simulation depth",
+          "Max tile"
       ]
       const workSheetName = "Results";
       const filePath = './outputFiles/' + "results" + ".xlsx";
